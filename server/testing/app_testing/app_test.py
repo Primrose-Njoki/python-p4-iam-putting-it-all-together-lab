@@ -1,3 +1,9 @@
+
+import sys
+import os
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '../../../')))
+
+from app import app, db
 from faker import Faker
 import flask
 import pytest
@@ -7,7 +13,8 @@ from app import app
 from models import db, User, Recipe
 
 app.secret_key = b'a\xdb\xd2\x13\x93\xc1\xe9\x97\xef2\xe3\x004U\xd1Z'
-
+with app.app_context():
+        db.create_all()
 class TestSignup:
     '''Signup resource in app.py'''
 
